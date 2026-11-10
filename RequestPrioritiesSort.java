@@ -1,0 +1,31 @@
+import java.util.Arrays;
+
+public class RequestPrioritiesSort {
+    public static void main(String[] args) {
+        int[] arr={5,1,3,1,5};
+        countingSort(arr);
+        System.out.println(Arrays.toString(arr));
+    }
+
+    public static void countingSort(int[] arr) {
+        if(arr.length==0)return;
+        int min=arr[0];
+        int max=arr[0];
+        for(int val:arr){
+            if(val<min)min=val;
+            if(val>max)max=val;
+        }
+        int range=max-min+1;
+        int[] count=new int[range];
+        for(int val:arr){
+            count[val-min]++;
+        }
+        int index=0;
+        for(int i=0;i<count.length;i++){
+            while(count[i]>0){
+                arr[index++]=i+min;
+                count[i]--;
+            }
+        }
+    }
+}
